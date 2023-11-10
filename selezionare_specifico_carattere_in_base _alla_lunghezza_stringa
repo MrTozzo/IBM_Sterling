@@ -1,0 +1,37 @@
+Questa extended Rules può tornare utile quando dobbiamo selezionare uno specifico carattere in base alla lunghezza della stringa. 
+
+###############################################################
+integer lng;
+lng = len(CAMPO_MAPPA);
+if lng = VALORE then CAMPO_MAPPA = right(CAMPO_MAPPA, 1);
+else
+CAMPO_MAPPA = right(CAMPO_MAPPA,2);
+################################################################
+
+La regola definisce un integer chiamandolo lng, che poi successivamente viene valorizzato come la lunghezza (tramite comando len) 
+del campo della mappa che ci interessa. Successivamente c'è una condizione (if...then). In questa condizione andiamo a dire che se  
+il campo lng è uguale ad un determinato VALORE allora dovrò prendere l'ultimo carattere da destra del valore che trovo dentro CAMPO_MAPPA.
+Altrimenti dovrò prendere gli ultimi due caratteri da destra del valore che trovo dentro CAMPO_MAPPA. 
+
+Nel mio caso io avevo un campo SIZE che veniva valorizzato nella seguente maniera: AA-1-XL oppure AA-1-S. Quindi la regola che ho creato
+è stata la seguente: 
+
+integer lng;
+lng = len(#SIZE);
+
+if lng = 6 then #SIZE = right(#SIZE, 1);
+
+else
+
+#SIZE = right(#SIZE, 2); 
+
+Questo perché della stringa che mi veniva passata nel campo SIZE avevo bisogno solo degli ultimi caratteri (XL o S), però a seconda di come 
+arrivava la stringa (per non prendere anche il trattino - ) dovevo prendere l'ultimo o gli ultimi due caratteri. 
+
+Quindi nel caso di AA-1-S il valore lng sarebbe stato uguale a 6 e la condizione vera, allora sarebbe stato eseguito il seguente comando #SIZE = right(#SIZE, 1);
+Invece nel caso di AA-1-XL il valore lng sarebbe stato diverso da 6 e la condizione falsa, allora il comando eseguito sarebbe stato #SIZE = right(#SIZE, 2);
+
+Nel caso di #SIZE = right(#SIZE, 1); dalla stringa AA-1-S prendo solo il carattere S. 
+Nel caso di #SIZE = right(#SIZE, 2); dalla stringa AA-1-XL prendo solo il carattere XL.
+
+
